@@ -44,10 +44,9 @@ class Form extends Component {
 
   componentDidMount() {
     const historyFromStorage = Object.keys(localStorage).map(key => {
-      let parsed = JSON.parse(key);
+      // let parsed = JSON.parse(key);
       return {
-        image: localStorage[key],
-        parsed
+        image: localStorage[key]
       };
     });
     console.log(historyFromStorage);
