@@ -7,12 +7,11 @@ import Grid from "@material-ui/core/Grid";
 import ImgCard from "./ImgCard";
 import Header from "./Header";
 import Form from "./Form";
-import "./App.css";
 
 const styles = {
   formContainer: {
     backgroundColor: "#f0f0f0",
-    padding: "80px 0 24px"
+    padding: "80px 0 16px"
   }
 };
 
@@ -24,12 +23,38 @@ class App extends Component {
     };
     this.classes = this.props.classes;
   }
+  componentDidMount() {
+    if (localStorage) {
+      const historyFromStorage = Object.keys(localStorage).map(key => {
+        return JSON.parse(localStorage[key]);
+      });
+      this.setState({ history: historyFromStorage });
+    }
+  }
+
   handleChange = result => {
-    this.setState({
-      history: result
+    this.setState(previousState => {
+      return { history: [...previousState.history, result] };
     });
   };
+  handleItemDeletion = key => {
+    const filteredHistory = this.state.history.filter(item => {
+      return Object.keys(item)[0] !== key;
+    });
+    this.setState({ history: filteredHistory });
+    localStorage.removeItem(key);
+  };
   render() {
+    let myCards;
+    if (this.state.history) {
+      myCards = this.state.history.map((el, index) => {
+        return (
+          <ImgCard key={index} info={el} deleteItem={this.handleItemDeletion} />
+        );
+      });
+    } else {
+      myCards = <h5>No results!</h5>;
+    }
     return (
       <Grid container>
         <Grid item xs={12}>
@@ -42,9 +67,7 @@ class App extends Component {
         </Grid>
         <Grid item xs={12}>
           <Grid container justify="center">
-            {this.state.history.map((el, index) => {
-              return <ImgCard key={index} info={el} />;
-            })}
+            {myCards}
           </Grid>
         </Grid>
       </Grid>

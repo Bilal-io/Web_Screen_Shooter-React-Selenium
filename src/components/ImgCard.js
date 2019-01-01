@@ -8,8 +8,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
-import "./ImgCard.css";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SaveIcon from "@material-ui/icons/Save";
 
 const styles = {
   grid: {
@@ -30,6 +30,9 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
+  },
+  rightIcon: {
+    marginLeft: 8
   }
 };
 
@@ -37,12 +40,18 @@ class ImgCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.info.link,
-      image: this.props.info.image,
-      width: this.props.info.width,
-      height: this.props.info.height
+      link: Object.values(props.info)[0].link,
+      width: Object.values(props.info)[0].width,
+      height: Object.values(props.info)[0].height,
+      image: Object.values(props.info)[0].image,
+      key: Object.keys(props.info)[0]
     };
+    this.key = Object.keys(props.info);
     this.classes = this.props.classes;
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.props.deleteItem(this.state.key);
   }
 
   render() {
@@ -52,15 +61,15 @@ class ImgCard extends Component {
           <CardContent className={this.classes.mediaContainer}>
             <CardMedia
               component="img"
-              alt={"This is a screenshot of " + this.state.name}
+              alt={"This is a screenshot of " + this.state.link}
               className={this.classes.media}
               image={`data:image/png;base64, ${this.state.image}`}
-              title={this.state.name}
+              title={this.state.link}
             />
           </CardContent>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Website: {this.state.name.toUpperCase()}
+              Website: {this.state.link.toUpperCase()}
             </Typography>
             <Typography component="p">
               Width: {this.state.width} - Height: {this.state.height}
@@ -72,12 +81,23 @@ class ImgCard extends Component {
               variant="contained"
               size="medium"
               color="primary"
-              download={`${this.state.name}-${this.state.width}x${
+              download={`${this.state.link}-${this.state.width}x${
                 this.state.height
               }.png`}
               href={"data:application/octet-stream;base64," + this.state.image}
             >
               SAVE
+              <SaveIcon className={this.classes.rightIcon} />
+            </Button>
+            <Button
+              fullWidth={true}
+              variant="contained"
+              color="secondary"
+              className={this.classes.button}
+              onClick={this.handleClick}
+            >
+              DELETE
+              <DeleteIcon className={this.classes.rightIcon} />
             </Button>
           </CardActions>
         </Card>

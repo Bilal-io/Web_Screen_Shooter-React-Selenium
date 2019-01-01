@@ -7,14 +7,20 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
-const styles = theme => ({
+const styles = {
   root: {
     width: "100%"
   },
   grow: {
     flexGrow: 1
+  },
+  logo: {
+    height: 44,
+    width: 50,
+    color: "#0a0a0a",
+    marginRight: 8
   }
-});
+};
 
 class Header extends React.Component {
   render() {
@@ -24,6 +30,58 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
+            <SvgIcon viewBox="" className={classes.logo}>
+              <path d="M48,0H0V34H20.73l-1.6,8H15v2H33V42H28.86l-1.65-8H48" />
+              <circle
+                cx="24"
+                cy="17"
+                r="6.73"
+                fill="#231f20"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <line
+                x1="24"
+                y1="7.26"
+                x2="24"
+                y2="13.71"
+                fill="#231f20"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <line
+                x1="14.26"
+                y1="17"
+                x2="20.71"
+                y2="17"
+                fill="#231f20"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <line
+                x1="24"
+                y1="26.74"
+                x2="24"
+                y2="20.29"
+                fill="#231f20"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <line
+                x1="33.74"
+                y1="17"
+                x2="27.29"
+                y2="17"
+                fill="#231f20"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </SvgIcon>
             <Typography
               className={classes.title}
               variant="h6"

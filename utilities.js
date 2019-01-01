@@ -7,9 +7,9 @@ function init(link, inWidth, inHeight) {
   const height = +inHeight;
   const options = new chrome.Options();
   options.addArguments(
-    // "headless",
-    // "start-maximized",
-    // "--start-fullscreen",
+    "headless",
+    "start-maximized",
+    "--start-fullscreen",
     "disable-infobars",
     "--disable-extensions",
     "--disable-dev-shm-usage",
