@@ -96,7 +96,7 @@ class Header extends React.Component {
               <IconButton
                 component="a"
                 color="inherit"
-                href="https://github.com/bilal-io/screen-shooter"
+                href="https://github.com/Bilal-io/Web_Screen_Shooter-React-Selenium"
                 aria-label="GitHub repository"
                 data-ga-event-category="AppBar"
                 data-ga-event-action="github"
