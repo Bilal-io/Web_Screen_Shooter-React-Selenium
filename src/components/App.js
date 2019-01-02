@@ -39,7 +39,7 @@ class App extends Component {
   };
   handleItemDeletion = key => {
     const filteredHistory = this.state.history.filter(item => {
-      return Object.keys(item)[0] !== key;
+      if (Object.keys(item)[0] !== key) return item;
     });
     this.setState({ history: filteredHistory });
     localStorage.removeItem(key);
@@ -47,9 +47,13 @@ class App extends Component {
   render() {
     let myCards;
     if (this.state.history) {
-      myCards = this.state.history.map((el, index) => {
+      myCards = this.state.history.map(el => {
         return (
-          <ImgCard key={index} info={el} deleteItem={this.handleItemDeletion} />
+          <ImgCard
+            key={Object.keys(el)[0]} // using index as a key was a bad idea, on delete, React deletes the item with the highest index from the view which is not what I want
+            info={el}
+            deleteItem={this.handleItemDeletion}
+          />
         );
       });
     } else {
