@@ -30,7 +30,7 @@ class Header extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <SvgIcon viewBox="" className={classes.logo}>
+            <SvgIcon viewBox="0 0 48 44" className={classes.logo}>
               <path d="M48,0H0V34H20.73l-1.6,8H15v2H33V42H28.86l-1.65-8H48" />
               <circle
                 cx="24"
@@ -38,8 +38,8 @@ class Header extends React.Component {
                 r="6.73"
                 fill="#231f20"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <line
                 x1="24"
@@ -48,8 +48,8 @@ class Header extends React.Component {
                 y2="13.71"
                 fill="#231f20"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <line
                 x1="14.26"
@@ -58,8 +58,8 @@ class Header extends React.Component {
                 y2="17"
                 fill="#231f20"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <line
                 x1="24"
@@ -68,8 +68,8 @@ class Header extends React.Component {
                 y2="20.29"
                 fill="#231f20"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <line
                 x1="33.74"
@@ -78,8 +78,8 @@ class Header extends React.Component {
                 y2="17"
                 fill="#231f20"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </SvgIcon>
             <Typography
