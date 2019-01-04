@@ -5,13 +5,14 @@ In the backend `Selenium` is being used. To run this, you must have `Chrome brow
 Clone
 
 ```bash
-git clone git@github.com:Bilal-io/Web_Screen_Shooter-React-Selenium.git && cd Web_Screen_Shooter-React-Selenium
+git clone https://github.com/Bilal-io/Web_Screen_Shooter-React-Selenium.git && cd Web_Screen_Shooter-React-Selenium
 ```
 
 Then
 
 ```bash
-npm instal && npm start
+npm install && npm start
 ```
 
-Express will be run on port `4000`, you can change it in `server.js`, and don't forget to change it in the proxy in `package.json`
+React will run on port `3006`, you may change it in scripts/start.js `const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3006;`
+Express will run on port `4000`, you can change it in `server.js`, and don't forget to change it in the proxy in `package.json`
