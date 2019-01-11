@@ -67,9 +67,10 @@ class Form extends Component {
     event.preventDefault();
 
     // remove http:// https:// and www.
-    let fixedLink = await this.state.link
-      .replace(/^(?:https?:\/\/)?(?:www\.)?/i, "")
-      .split("/")[0];
+    let fixedLink = await this.state.link.replace(
+      /^(?:https?:\/\/)?(?:www\.)?/i,
+      ""
+    );
     this.setState({ link: fixedLink });
 
     // Check new form values against localStorage before making an API call
