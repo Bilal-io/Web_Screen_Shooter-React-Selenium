@@ -3,8 +3,8 @@ const { Builder, By, Key, until } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 
 function init(link, inWidth, inHeight) {
-  const width = +inWidth;
-  const height = +inHeight;
+  const width = parseInt(inWidth);
+  const height = parseInt(inHeight);
   const options = new chrome.Options();
   options.addArguments(
     "headless",
@@ -32,20 +32,25 @@ function init(link, inWidth, inHeight) {
   return driver;
 }
 async function openAndShoot(driver, url) {
-  const urlWithProtocol = "https://" + url;
-  await driver.get(urlWithProtocol);
+  try {
+    await driver.get(url);
 
-  await driver.sleep(200);
-  return await driver.takeScreenshot().then(res => {
-    driver.close();
-    return res;
-  });
+    await driver.sleep(200);
+    const result = await driver.takeScreenshot().then(res => {
+      driver.close();
+      return res;
+    });
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
 }
 module.exports.seleniumScreen = async function(link, inWidth, inHeight) {
   try {
     // initialize
     const driver = await init(link, inWidth, inHeight);
-    return await openAndShoot(driver, link);
+    const result = await openAndShoot(driver, link).then(res => res);
+    return result;
   } catch (err) {
     console.log(err);
   }
