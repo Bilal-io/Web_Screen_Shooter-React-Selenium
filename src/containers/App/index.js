@@ -1,10 +1,9 @@
 import React, { PureComponent } from "react";
 
 import Header from "../../components/Header";
-import GlobalStyle from "../../components/GlobalStyle";
-
 import Form from "../Form";
 import DisplayCards from "../DisplayCards";
+import GlobalStyle from "../../components/GlobalStyle";
 
 class App extends PureComponent {
   render() {

@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-import MUI_CardContent from "@material-ui/core/CardContent";
-
-const ImgWrapper = styled(MUI_CardContent)`
+const StyledCardContent = styled.div`
   && {
     width: 345px;
     height: 220px;
@@ -12,7 +10,11 @@ const ImgWrapper = styled(MUI_CardContent)`
     display: flex;
     align-items: center;
     justify-content: center;
+    & > img {
+      height: auto;
+      width: 100%;
+    }
   }
 `;
 
-export default ImgWrapper;
+export default StyledCardContent;

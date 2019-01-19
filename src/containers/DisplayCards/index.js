@@ -3,47 +3,49 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { removeScreenshot } from "../App/actions";
-import Wrapper from "./Wrapper";
-import CardWrapper from "./CardWrapper";
-import ImgWrapper from "./ImgWrapper";
-import Button from "../../components/Button";
+
+import Wrapper from "../../components/FlexWrapper";
+import StyledCard from "./StyledCard";
+import StyledCardContent from "./StyledCardContent";
+import P from "./StyledP";
+import Button from "./StyledButton";
 import H2 from "../../components/H2";
 import H3 from "../../components/H3";
-
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import DeleteIcon from "@material-ui/icons/Delete";
-import SaveIcon from "@material-ui/icons/Save";
+import Img from "../../components/Img";
+import LoadingIndicator from "../../components/LoadingIndicator";
+import DeleteIcon from "../../components/DeleteIcon";
+import SaveIcon from "../../components/SaveIcon";
+import CardActions from "./CardActionsWrapper";
 
 class DisplayCards extends PureComponent {
   render() {
     return (
-      <Wrapper>
+      <Wrapper justifyContent={"center"} flexWrap={true}>
+        <LoadingIndicator loading={this.props.loading} />
         {this.props.screenshots.map(value => (
-          <CardWrapper key={value.get("key")}>
-            <ImgWrapper>
-              <CardMedia
-                component="img"
+          <StyledCard key={value.get("key")}>
+            <StyledCardContent>
+              <Img
                 alt={"This is a screenshot of " + value.get("link")}
-                style={{ height: "auto" }}
-                image={`data:image/png;base64, ${value.get("screenshot")}`}
-                title={value.get("link")}
+                src={`data:image/png;base64, ${value.get("screenshot")}`}
               />
-            </ImgWrapper>
-            <CardContent>
+            </StyledCardContent>
+            <Wrapper
+              flexDirection={"column"}
+              flexWrap={true}
+              paddingLeft={16}
+              paddingRight={16}
+            >
               <H2>Website:</H2>
               <H3>{value.get("link").toUpperCase()}</H3>
-              <Typography component="p">
+              <P>
                 Width: {value.get("width")} - Height: {value.get("height")}
-              </Typography>
-            </CardContent>
+              </P>
+            </Wrapper>
             <CardActions>
               <Button
                 fullWidth={true}
                 variant="contained"
-                size="medium"
                 color="primary"
                 download={`${value.get("link")}-${value.get(
                   "width"
@@ -66,7 +68,7 @@ class DisplayCards extends PureComponent {
                 <DeleteIcon style={{ marginLeft: 8 }} />
               </Button>
             </CardActions>
-          </CardWrapper>
+          </StyledCard>
         ))}
       </Wrapper>
     );

@@ -1,3 +1,4 @@
+import uniqid from "uniqid";
 import { takeLatest, put, select } from "redux-saga/effects";
 
 import {
@@ -22,11 +23,13 @@ function* getScreenshot(dispatch) {
     const result = yield screenshot.json();
     yield put({
       type: LOAD_SCREENSHOT_SUCCESS,
-      key: `${formState.get("link")}-${formState.get("width")}-${formState.get(
-        "height"
-      )}`,
+      key: uniqid(
+        `${formState.get("link")}-${formState.get("width")}-${formState.get(
+          "height"
+        )}-`
+      ),
       screenshot: result.screenshot,
-      link: result.link,
+      link: result.link.replace(/^(?:https?:\/\/)?(?:www\.)?/i, ""),
       width: result.width,
       height: result.height
     });

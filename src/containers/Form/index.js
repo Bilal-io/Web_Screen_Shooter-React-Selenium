@@ -2,13 +2,12 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import StyledForm from "./StyledForm";
-import Wrapper from "./Wrapper";
-import StyledButton from "./StyledButton";
-
 import { changeLink, changeWidth, changeHeight } from "./actions";
 import { loadScreenshot } from "../App/actions";
 
+import StyledForm from "./StyledForm";
+import StyledButton from "./StyledButton";
+import Wrapper from "../../components/FlexWrapper";
 import Input from "../../components/Input";
 import ErrorText from "../../components/ErrorText";
 
@@ -43,7 +42,13 @@ class Form extends PureComponent {
       );
     }
     return (
-      <Wrapper>
+      <Wrapper
+        flexWrap={true}
+        justifyContent={"center"}
+        backgroundColor={"ghostwhite"}
+        paddingTop={80}
+        paddingBottom={16}
+      >
         <StyledForm onSubmit={this.props.onSubmitForm} autoComplete="off">
           <Input
             required
@@ -53,7 +58,7 @@ class Form extends PureComponent {
             disabled={this.props.loading}
             value={this.props.link}
             variant="outlined"
-            label="Website"
+            label="https://example.com"
           />
           <Input
             required
