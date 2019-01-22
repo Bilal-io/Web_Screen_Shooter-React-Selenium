@@ -1,7 +1,10 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { createStructuredSelector } from "reselect";
 
+import { makeSelectLink, makeSelectWidth, makeSelectHeight } from "./selectors";
+import { makeSelectLoading, makeSelectError } from "../App/selectors";
 import { changeLink, changeWidth, changeHeight } from "./actions";
 import { loadScreenshot } from "../App/actions";
 
@@ -9,9 +12,8 @@ import StyledForm from "./StyledForm";
 import StyledButton from "./StyledButton";
 import Wrapper from "../../components/FlexWrapper";
 import Input from "../../components/Input";
-import ErrorText from "../../components/ErrorText";
 
-class Form extends PureComponent {
+export class Form extends PureComponent {
   onSetResult = (image, key) => {
     let value = {
       [key]: {
@@ -31,16 +33,6 @@ class Form extends PureComponent {
   };
 
   render() {
-    let itemExistsError;
-    if (this.props.itemExists) {
-      itemExistsError = (
-        <ErrorText
-          link={this.props.link}
-          width={this.props.width}
-          height={this.props.height}
-        />
-      );
-    }
     return (
       <Wrapper
         flexWrap={true}
@@ -90,7 +82,6 @@ class Form extends PureComponent {
             Aim And Shoot!
           </StyledButton>
         </StyledForm>
-        {itemExistsError}
       </Wrapper>
     );
   }
@@ -124,17 +115,13 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const mapStateToProps = rootState => {
-  const globalState = rootState.get("global");
-  const formState = rootState.get("form");
-  return {
-    loading: globalState.get("loading"),
-    error: globalState.get("error"),
-    link: formState.get("link"),
-    width: formState.get("width"),
-    height: formState.get("height")
-  };
-};
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
+  link: makeSelectLink(),
+  width: makeSelectWidth(),
+  height: makeSelectHeight()
+});
 export default connect(
   mapStateToProps,
   mapDispatchToProps

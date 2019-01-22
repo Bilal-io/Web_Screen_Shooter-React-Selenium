@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Img /> should match the snapshot 1`] = `
+.c0 {
+  height: 48px;
+  width: 48px;
+  color: "#0a0a0a";
+  margin-right: 8px;
+}
+
+<img
+  alt="test"
+  className="c0"
+  src="https://via.placeholder.com/150"
+/>
+`;

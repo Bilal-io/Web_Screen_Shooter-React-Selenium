@@ -1,9 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import LoaderWrapper from "./LoaderWrapper";
+import Loader from "./Loader";
+import StyledCard from "../StyledCard";
+
 function LoadingIndicator({ loading }) {
   if (loading) {
-    return <p>Loading</p>;
+    return (
+      <StyledCard>
+        <LoaderWrapper>
+          <div>
+            <Loader delay={"-0.16"} />
+            <Loader />
+            <Loader delay={"0.16"} />
+          </div>
+          <span>Shooting...</span>
+        </LoaderWrapper>
+      </StyledCard>
+    );
   }
   return null;
 }

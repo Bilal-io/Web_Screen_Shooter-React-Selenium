@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Img from "./Img";
 import Logo from "./Logo.svg";
 
-class LogoIcon extends Component {
-  render() {
-    return <Img src={Logo} alt="Screen Shooter Logo" />;
-  }
+function LogoIcon(props) {
+  return <Img src={Logo} {...props} alt="Screen Shooter Logo" />;
 }
 
 export default LogoIcon;

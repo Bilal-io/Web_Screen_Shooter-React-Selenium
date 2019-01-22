@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const StyledCardContent = styled.div`
   && {
-    width: 345px;
     height: 220px;
     padding: 0;
     overflow: hidden;

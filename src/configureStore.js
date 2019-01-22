@@ -4,11 +4,11 @@ import createSagaMiddleware from "redux-saga";
 
 import createReducer from "./reducers";
 
-import { appSaga } from "./containers/Form/sagas";
+import appSaga from "./containers/Form/sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore(initialState = {}, persistedState) {
+export default function configureStore(initialState = {}) {
   const middlewares = [sagaMiddleware];
   const enhancers = [applyMiddleware(...middlewares)];
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose

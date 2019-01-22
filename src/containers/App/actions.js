@@ -19,7 +19,6 @@ export function removeScreenshot(key) {
 }
 
 export function screenshotLoaded(key, screenshot, link, width, height) {
-  console.log(screenshot);
   return {
     type: LOAD_SCREENSHOT_SUCCESS,
     key,

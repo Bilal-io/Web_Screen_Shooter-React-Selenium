@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const NavBar = styled.header`
+const Navbar = styled.header`
   display: flex;
   position: relative;
   align-items: center;
@@ -16,4 +16,4 @@ const NavBar = styled.header`
   }
 `;
 
-export default NavBar;
+export default Navbar;

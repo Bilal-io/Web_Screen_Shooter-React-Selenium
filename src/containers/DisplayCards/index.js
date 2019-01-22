@@ -1,75 +1,35 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { createStructuredSelector } from "reselect";
 
 import { removeScreenshot } from "../App/actions";
+import {
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectScreenshots
+} from "../App/selectors";
 
 import Wrapper from "../../components/FlexWrapper";
-import StyledCard from "./StyledCard";
-import StyledCardContent from "./StyledCardContent";
-import P from "./StyledP";
-import Button from "./StyledButton";
-import H2 from "../../components/H2";
-import H3 from "../../components/H3";
-import Img from "../../components/Img";
 import LoadingIndicator from "../../components/LoadingIndicator";
-import DeleteIcon from "../../components/DeleteIcon";
-import SaveIcon from "../../components/SaveIcon";
-import CardActions from "./CardActionsWrapper";
+import Card from "../../components/Card";
 
 class DisplayCards extends PureComponent {
   render() {
     return (
       <Wrapper justifyContent={"center"} flexWrap={true}>
         <LoadingIndicator loading={this.props.loading} />
-        {this.props.screenshots.map(value => (
-          <StyledCard key={value.get("key")}>
-            <StyledCardContent>
-              <Img
-                alt={"This is a screenshot of " + value.get("link")}
-                src={`data:image/png;base64, ${value.get("screenshot")}`}
-              />
-            </StyledCardContent>
-            <Wrapper
-              flexDirection={"column"}
-              flexWrap={true}
-              paddingLeft={16}
-              paddingRight={16}
-            >
-              <H2>Website:</H2>
-              <H3>{value.get("link").toUpperCase()}</H3>
-              <P>
-                Width: {value.get("width")} - Height: {value.get("height")}
-              </P>
-            </Wrapper>
-            <CardActions>
-              <Button
-                fullWidth={true}
-                variant="contained"
-                color="primary"
-                download={`${value.get("link")}-${value.get(
-                  "width"
-                )}x${value.get("height")}.png`}
-                href={
-                  "data:application/octet-stream;base64," +
-                  value.get("screenshot")
-                }
-              >
-                SAVE
-                <SaveIcon style={{ marginLeft: 8 }} />
-              </Button>
-              <Button
-                fullWidth={true}
-                variant="contained"
-                color="secondary"
-                onClick={() => this.props.onRemove(value.get("key"))}
-              >
-                DELETE
-                <DeleteIcon style={{ marginLeft: 8 }} />
-              </Button>
-            </CardActions>
-          </StyledCard>
-        ))}
+        {this.props.screenshots.map(value => {
+          const props = {
+            myKey: value.get("key"),
+            screenshot: value.get("screenshot"),
+            link: value.get("link"),
+            width: value.get("width"),
+            height: value.get("height"),
+            onRemove: this.props.onRemove
+          };
+          return <Card key={props.myKey} {...props} />;
+        })}
       </Wrapper>
     );
   }
@@ -87,15 +47,11 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const mapStateToProps = rootState => {
-  const globalState = rootState.get("global");
-
-  return {
-    loading: globalState.get("loading"),
-    error: globalState.get("error"),
-    screenshots: globalState.get("screenshots")
-  };
-};
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
+  screenshots: makeSelectScreenshots()
+});
 export default connect(
   mapStateToProps,
   mapDispatchToProps
