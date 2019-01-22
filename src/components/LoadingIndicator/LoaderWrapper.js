@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const LoaderWrapper = styled.div`
   width: 345px;
-  height: 100%;
+  height: 345px;
   display: flex;
   flex-direction: column;
   align-items: center;
