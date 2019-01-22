@@ -17,13 +17,14 @@ export function* getScreenshot() {
       `/api/?link=${link}&width=${width}&height=${height}`
     );
     const result = yield screenshot.json();
+    const cleanedLink = link.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
     yield put(
       screenshotLoaded(
-        uniqid(`${link}-${width}-${height}-`),
+        uniqid(`${cleanedLink}-${width}-${height}-`),
         result.screenshot,
-        result.link.replace(/^(?:https?:\/\/)?(?:www\.)?/i, ""),
-        result.width,
-        result.height
+        cleanedLink,
+        width,
+        height
       )
     );
     yield put({ type: RESET_FORM });
